@@ -1,4 +1,4 @@
-package com.example.demo.services;
+package com.example.demo.service;
 
 import com.example.demo.exception.ProductNotFoundException;
 import com.example.demo.model.Product;
