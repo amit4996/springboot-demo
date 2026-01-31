@@ -4,21 +4,22 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                echo 'Checking local tools...'
+                echo 'Checking Environment...'
+                sh 'java -version'
                 sh 'git --version'
-                // sh 'node --version' // Uncomment if you use Node.js
-                // sh 'python --version' // Uncomment if you use Python
             }
         }
         stage('Build') {
             steps {
-                echo 'Building your project...'
-                // If you have a build command, put it here, e.g., sh 'npm install'
+                echo 'Building Spring Boot Application...'
+                // Using the wrapper to compile and package into a JAR
+                sh './mvnw clean package -DskipTests'
             }
         }
         stage('Test') {
             steps {
-                echo 'Running tests...'
+                echo 'Running Unit Tests...'
+                sh './mvnw test'
             }
         }
     }
