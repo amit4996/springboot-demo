@@ -16,6 +16,23 @@ pipeline {
                 sh './mvnw clean package -DskipTests'
             }
         }
+        stage('Deploy to Nexus') {
+            steps {
+                // This block securely fetches the credentials from the Jenkins store
+                withCredentials([usernamePassword(credentialsId: 'nexus-creds',
+                                                  passwordVariable: 'NEXUS_PASSWORD',
+                                                  usernameVariable: 'NEXUS_USERNAME')]) {
+
+                    echo "Uploading Artifact to Nexus..."
+
+                    // We pass the credentials directly into the Maven command
+                    sh "./mvnw deploy -DskipTests " +
+                       "-DaltDeploymentRepository=nexus-releases::default::${env.NEXUS_URL} " +
+                       "-Dmaven.wagon.http.auth.username=${NEXUS_USERNAME} " +
+                       "-Dmaven.wagon.http.auth.password=${NEXUS_PASSWORD}"
+                }
+            }
+        }
         stage('Test') {
             steps {
                 echo 'Running Unit Tests...'
