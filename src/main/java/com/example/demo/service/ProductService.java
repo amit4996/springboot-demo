@@ -13,8 +13,12 @@ import java.util.List;
 @Slf4j
 public class ProductService {
 
+    private final ProductRepository productRepository;
+
     @Autowired
-    ProductRepository productRepository;
+    public ProductService(ProductRepository productRepository){
+        this.productRepository=productRepository;
+    }
 
     public List<Product> getProducts(){
         log.debug("Fetching all products");

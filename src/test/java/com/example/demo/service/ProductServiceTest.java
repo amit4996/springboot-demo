@@ -21,10 +21,6 @@ class ProductServiceTest {
     @InjectMocks
     ProductService productService;
 
-    @Test
-    void getProducts() {
-
-    }
 
     @Test
     void addProduct() {
