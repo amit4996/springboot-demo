@@ -16,6 +16,20 @@ pipeline {
                 sh './mvnw clean package -DskipTests'
             }
         }
+        stage('Deploy to Nexus') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'nexus-creds',
+                                                  passwordVariable: 'NEXUS_PWD',
+                                                  usernameVariable: 'NEXUS_USR')]) {
+
+                    echo "Deploying via Maven with inline credentials..."
+
+                    // We inject the credentials directly into the URL string.
+                    // This bypasses the need for any <server> blocks or -Dauth properties.
+                    sh "./mvnw deploy -DskipTests -DaltDeploymentRepository=nexus-creds::default::http://${NEXUS_USR}:${NEXUS_PWD}@localhost:8081/repository/my-releases/"
+                }
+            }
+        }
         stage('Test') {
             steps {
                 echo 'Running Unit Tests...'
