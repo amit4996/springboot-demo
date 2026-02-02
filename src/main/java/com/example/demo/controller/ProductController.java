@@ -50,7 +50,6 @@ public class ProductController {
         productService.deleteProduct(productId);
 
 
-
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
    }
 
