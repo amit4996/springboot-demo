@@ -42,7 +42,6 @@ public class ProductController {
    @PatchMapping("/product")
    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) {
         Product updatedProduct = productService.updateProduct(product);
-
         return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
    }
 
