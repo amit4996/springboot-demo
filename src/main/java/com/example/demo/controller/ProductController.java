@@ -44,6 +44,7 @@ public class ProductController {
         Product updatedProduct = productService.updateProduct(product);
 
 
+
         return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
    }
 
