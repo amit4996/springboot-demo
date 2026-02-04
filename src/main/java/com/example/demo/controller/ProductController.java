@@ -38,7 +38,6 @@ public class ProductController {
          Product createdProduct = productService.addProduct(product);
 
 
-
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
