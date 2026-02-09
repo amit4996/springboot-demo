@@ -32,7 +32,6 @@ public class ProductController {
         Product product = productService.getProductsById(productId);
 
 
-
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
