@@ -31,7 +31,6 @@ public class ProductController {
     public ResponseEntity<Product> getProductsById(@PathVariable Integer productId){
         Product product = productService.getProductsById(productId);
 
-
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
