@@ -26,7 +26,6 @@ public class ProductController {
         List<Product> products = productService.getProducts();
 
 
-
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 
