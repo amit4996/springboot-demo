@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +34,13 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product){
+    public ResponseEntity<Product> addProduct(@Valid @RequestBody Product product){
          Product createdProduct = productService.addProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
    @PatchMapping("/product")
-   public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+   public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) {
         Product updatedProduct = productService.updateProduct(product);
         return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
    }
